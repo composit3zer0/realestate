@@ -229,6 +229,14 @@
       transform: scale(1);
     }
 
+    .hero-slide:nth-child(2) {
+      background-position: center 58%;
+    }
+
+    .hero-slide:nth-child(4) {
+      background-position: center 62%;
+    }
+
     .hero-layout {
       position: relative;
       z-index: 2;
@@ -261,25 +269,28 @@
       letter-spacing: 0;
     }
 
-    .hero-copy {
-      max-width: 650px;
-      margin-bottom: 30px;
-      color: rgba(255, 255, 255, 0.9);
-      font-size: clamp(1rem, 2.2vw, 1.22rem);
+    .hero-reel {
+      position: relative;
+      min-height: 78px;
+      margin: -4px 0 34px;
     }
 
-    .hero-slogan {
-      margin: -4px 0 18px;
-      color: rgba(255, 255, 255, 0.94);
-      font-size: clamp(1.2rem, 3vw, 2rem);
-      font-weight: 850;
+    .hero-message {
+      position: absolute;
+      inset: 0 auto auto 0;
+      max-width: min(760px, 100%);
+      opacity: 0;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: clamp(1.65rem, 5vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1;
+      transition: opacity 700ms ease, transform 700ms ease;
+      transform: translateY(10px);
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 38px;
+    .hero-message.is-active {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .search-panel {
@@ -727,7 +738,10 @@
         padding-top: 112px;
       }
 
-      .hero-actions,
+      .hero-reel {
+        min-height: 110px;
+      }
+
       .button-row {
         align-items: stretch;
         flex-direction: column;
@@ -790,22 +804,19 @@
         <div class="hero-slide is-active" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=86');"></div>
         <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=2200&q=86');"></div>
         <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=2200&q=86');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=2200&q=86');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=2200&q=86');"></div>
       </div>
       <div class="shell hero-layout">
         <div>
-          <p class="eyebrow">South Luzon homes, guided with care</p>
+          <p class="eyebrow">Calamba area property guide</p>
           <h1>Isabel's Place Realty</h1>
-          <p class="hero-slogan">There's no place like home.</p>
-          <p class="hero-copy">A warm, practical real estate guide for families, investors, and overseas buyers comparing developer projects, house-and-lots, and condominiums from Parañaque to Calamba, Laguna.</p>
-          <div class="hero-actions">
-            <a class="primary-button" href="#listings">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 18a8 8 0 1 1 5.3-14 8 8 0 0 1-5.3 14Zm11 3-5.7-5.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-              Browse Properties
-            </a>
-            <a class="secondary-button" href="#contact">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z" stroke="currentColor" stroke-width="2"/><path d="M14 3v6h6" stroke="currentColor" stroke-width="2"/></svg>
-              Ask for Matches
-            </a>
+          <div class="hero-reel" aria-live="polite">
+            <p class="hero-message is-active">Camella Calamba</p>
+            <p class="hero-message">Sentrina Calamba</p>
+            <p class="hero-message">Montebello</p>
+            <p class="hero-message">Averdeen Estates NUVALI</p>
+            <p class="hero-message">There's no place like home.</p>
           </div>
         </div>
 
@@ -1069,6 +1080,7 @@
     const leadForm = document.querySelector("#leadForm");
     const formNote = document.querySelector("#formNote");
     const heroSlides = Array.from(document.querySelectorAll(".hero-slide"));
+    const heroMessages = Array.from(document.querySelectorAll(".hero-message"));
     const currencyButtons = Array.from(document.querySelectorAll("[data-currency]"));
     const priceNodes = Array.from(document.querySelectorAll(".price[data-price-php]"));
     const rateNotes = Array.from(document.querySelectorAll("[data-rate-note]"));
@@ -1082,10 +1094,16 @@
         return;
       }
 
-      setInterval(() => {
+      const slideshowTimer = setInterval(() => {
         heroSlides[activeHeroSlide].classList.remove("is-active");
+        heroMessages[activeHeroSlide]?.classList.remove("is-active");
         activeHeroSlide = (activeHeroSlide + 1) % heroSlides.length;
         heroSlides[activeHeroSlide].classList.add("is-active");
+        heroMessages[activeHeroSlide]?.classList.add("is-active");
+
+        if (activeHeroSlide === heroSlides.length - 1) {
+          clearInterval(slideshowTimer);
+        }
       }, 5200);
     }
 
