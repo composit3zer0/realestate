@@ -1,0 +1,997 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harbor & Hearth Realty</title>
+  <meta name="description" content="A refined real estate agency landing page for buyers, sellers, and local market guidance.">
+  <style>
+    :root {
+      --ink: #18201d;
+      --muted: #61706b;
+      --paper: #fbfaf7;
+      --line: #ded9cf;
+      --pine: #1f4d3a;
+      --pine-dark: #16382a;
+      --clay: #c8664b;
+      --gold: #c79a4b;
+      --mist: #eef2ef;
+      --white: #ffffff;
+      --shadow: 0 18px 44px rgba(24, 32, 29, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .shell {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: fixed;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      right: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(24, 32, 29, 0.76);
+      color: var(--white);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: var(--clay);
+      color: var(--white);
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 0.94rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+    }
+
+    .nav-action,
+    .primary-button,
+    .secondary-button,
+    .icon-button {
+      border: 0;
+      cursor: pointer;
+      border-radius: 8px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease;
+    }
+
+    .nav-action {
+      padding: 0 18px;
+      background: var(--white);
+      color: var(--pine-dark);
+      font-weight: 750;
+    }
+
+    .primary-button {
+      padding: 0 20px;
+      background: var(--pine);
+      color: var(--white);
+      font-weight: 800;
+    }
+
+    .secondary-button {
+      padding: 0 18px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--pine-dark);
+      font-weight: 800;
+    }
+
+    .icon-button {
+      width: 44px;
+      background: var(--mist);
+      color: var(--pine-dark);
+    }
+
+    .nav-action:hover,
+    .primary-button:hover,
+    .secondary-button:hover,
+    .icon-button:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      align-items: end;
+      padding: 132px 0 54px;
+      color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(11, 20, 17, 0.82) 0%, rgba(11, 20, 17, 0.54) 43%, rgba(11, 20, 17, 0.18) 100%),
+        url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2200&q=86") center / cover;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 720px);
+      gap: 30px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: #f5c978;
+      font-size: 0.84rem;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 18px;
+      max-width: 760px;
+      font-size: clamp(3rem, 8vw, 6.7rem);
+      line-height: 0.94;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 610px;
+      margin-bottom: 30px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: clamp(1rem, 2.2vw, 1.22rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 38px;
+    }
+
+    .search-panel {
+      width: min(100%, 980px);
+      display: grid;
+      grid-template-columns: 1.35fr 1fr 1fr auto;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: var(--shadow);
+    }
+
+    .field {
+      min-width: 0;
+    }
+
+    .field label {
+      display: block;
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      color: var(--ink);
+      padding: 0 12px;
+      outline: 0;
+    }
+
+    section {
+      padding: 82px 0;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 0;
+      max-width: 650px;
+      font-size: clamp(2rem, 5vw, 3.7rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .section-heading p {
+      max-width: 430px;
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .stats-band {
+      padding: 30px 0;
+      background: var(--pine-dark);
+      color: var(--white);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .stat {
+      min-height: 116px;
+      display: grid;
+      align-content: center;
+      padding: 22px;
+      background: var(--pine-dark);
+    }
+
+    .stat strong {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1;
+    }
+
+    .stat span {
+      margin-top: 8px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.92rem;
+    }
+
+    .listing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .listing-card,
+    .quote-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 14px 34px rgba(24, 32, 29, 0.08);
+    }
+
+    .listing-card[hidden] {
+      display: none;
+    }
+
+    .listing-media {
+      aspect-ratio: 1.24 / 1;
+      position: relative;
+      overflow: hidden;
+      background: var(--mist);
+    }
+
+    .listing-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 500ms ease;
+    }
+
+    .listing-card:hover .listing-media img {
+      transform: scale(1.04);
+    }
+
+    .tag {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--pine-dark);
+      padding: 7px 11px;
+      font-size: 0.76rem;
+      font-weight: 850;
+    }
+
+    .listing-body {
+      padding: 18px;
+    }
+
+    .price {
+      margin-bottom: 8px;
+      color: var(--pine);
+      font-size: 1.52rem;
+      font-weight: 900;
+    }
+
+    .listing-body h3 {
+      margin-bottom: 7px;
+      font-size: 1.1rem;
+    }
+
+    .listing-body p {
+      color: var(--muted);
+      margin-bottom: 15px;
+    }
+
+    .details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .details span {
+      border-radius: 999px;
+      background: var(--mist);
+      padding: 7px 10px;
+      color: var(--ink);
+      font-size: 0.86rem;
+      font-weight: 720;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .neighborhoods {
+      background: var(--mist);
+    }
+
+    .market-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr 1fr;
+      grid-auto-rows: 250px;
+      gap: 16px;
+    }
+
+    .market-tile {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      color: var(--white);
+      background: var(--pine);
+    }
+
+    .market-tile:nth-child(2) {
+      grid-row: span 2;
+    }
+
+    .market-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.92);
+    }
+
+    .market-tile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10, 18, 16, 0.03), rgba(10, 18, 16, 0.74));
+    }
+
+    .market-copy {
+      position: absolute;
+      z-index: 1;
+      left: 20px;
+      right: 20px;
+      bottom: 18px;
+    }
+
+    .market-copy strong {
+      display: block;
+      font-size: 1.3rem;
+    }
+
+    .market-copy span {
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .process-step {
+      border-top: 4px solid var(--clay);
+      padding-top: 18px;
+    }
+
+    .process-step strong {
+      display: inline-grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      background: var(--pine-dark);
+      color: var(--white);
+    }
+
+    .process-step h3 {
+      margin-bottom: 8px;
+    }
+
+    .process-step p {
+      color: var(--muted);
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .quote-card {
+      padding: 24px;
+    }
+
+    .quote-card p {
+      color: var(--ink);
+      font-size: 1.04rem;
+    }
+
+    .quote-card strong {
+      display: block;
+      margin-top: 22px;
+    }
+
+    .quote-card span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .contact {
+      padding-bottom: 0;
+      background: var(--pine-dark);
+      color: var(--white);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 38px;
+      align-items: start;
+    }
+
+    .contact h2 {
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .contact p {
+      color: rgba(255, 255, 255, 0.74);
+    }
+
+    .contact-points {
+      display: grid;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .contact-point {
+      display: flex;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .contact-point svg {
+      flex: 0 0 auto;
+      margin-top: 2px;
+      color: #f5c978;
+    }
+
+    .lead-form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .lead-form .wide {
+      grid-column: 1 / -1;
+    }
+
+    .lead-form label {
+      display: grid;
+      gap: 7px;
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    .lead-form input,
+    .lead-form select,
+    .lead-form textarea {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--ink);
+      padding: 12px;
+      outline: 0;
+    }
+
+    .lead-form textarea {
+      min-height: 112px;
+      resize: vertical;
+    }
+
+    .form-note {
+      margin: 2px 0 0;
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 0.84rem;
+    }
+
+    .footer {
+      margin-top: 74px;
+      padding: 28px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      color: rgba(255, 255, 255, 0.66);
+      font-size: 0.9rem;
+    }
+
+    .footer .shell {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 940px) {
+      .nav-links {
+        display: none;
+      }
+
+      .search-panel,
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .stats,
+      .listing-grid,
+      .process-grid,
+      .testimonial-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .market-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .market-tile:nth-child(2) {
+        grid-row: span 1;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .shell {
+        width: min(100% - 28px, 1160px);
+      }
+
+      .site-header {
+        position: absolute;
+      }
+
+      .brand span:last-child {
+        max-width: 168px;
+        white-space: normal;
+        line-height: 1.1;
+      }
+
+      .nav-action {
+        display: none;
+      }
+
+      .hero {
+        min-height: 860px;
+        padding-top: 112px;
+      }
+
+      .hero-actions,
+      .button-row {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .primary-button,
+      .secondary-button {
+        width: 100%;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-heading p {
+        margin-top: 14px;
+      }
+
+      .stats,
+      .listing-grid,
+      .process-grid,
+      .testimonial-grid,
+      .market-grid,
+      .lead-form {
+        grid-template-columns: 1fr;
+      }
+
+      .market-grid {
+        grid-auto-rows: 230px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell nav" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Harbor and Hearth Realty home">
+        <span class="brand-mark">H</span>
+        <span>Harbor &amp; Hearth Realty</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#listings">Listings</a>
+        <a href="#markets">Markets</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="nav-action" href="#contact">Book a Consult</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-layout">
+        <div>
+          <p class="eyebrow">Residential real estate for decisive moves</p>
+          <h1>Harbor &amp; Hearth Realty</h1>
+          <p class="hero-copy">A calm, strategic agency for buyers, sellers, and investors who want local guidance, sharp pricing, and a smoother path from first showing to closing table.</p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#listings">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 18a8 8 0 1 1 5.3-14 8 8 0 0 1-5.3 14Zm11 3-5.7-5.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Browse Homes
+            </a>
+            <a class="secondary-button" href="#contact">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z" stroke="currentColor" stroke-width="2"/><path d="M14 3v6h6" stroke="currentColor" stroke-width="2"/></svg>
+              Get a Valuation
+            </a>
+          </div>
+        </div>
+
+        <form class="search-panel" id="propertySearch">
+          <div class="field">
+            <label for="area">Location</label>
+            <input id="area" name="area" type="search" placeholder="Neighborhood, city, or ZIP">
+          </div>
+          <div class="field">
+            <label for="type">Property Type</label>
+            <select id="type" name="type">
+              <option value="all">Any type</option>
+              <option value="single-family">Single-family</option>
+              <option value="condo">Condo</option>
+              <option value="townhome">Townhome</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="budget">Budget</label>
+            <select id="budget" name="budget">
+              <option value="all">Any budget</option>
+              <option value="700000">Up to $700k</option>
+              <option value="1000000">Up to $1M</option>
+              <option value="1500000">Up to $1.5M</option>
+            </select>
+          </div>
+          <button class="primary-button" type="submit">Search</button>
+        </form>
+      </div>
+    </section>
+
+    <div class="stats-band">
+      <div class="shell stats" aria-label="Agency stats">
+        <div class="stat"><strong>$164M</strong><span>Closed volume</span></div>
+        <div class="stat"><strong>18</strong><span>Neighborhood markets</span></div>
+        <div class="stat"><strong>31</strong><span>Median days to close</span></div>
+        <div class="stat"><strong>4.9</strong><span>Client rating</span></div>
+      </div>
+    </div>
+
+    <section id="listings">
+      <div class="shell">
+        <div class="section-heading">
+          <h2>Featured homes with room for the life you are building.</h2>
+          <p>Handpicked properties across established neighborhoods, walkable districts, and quiet residential streets.</p>
+        </div>
+
+        <div class="listing-grid" id="listingGrid">
+          <article class="listing-card" data-type="single-family" data-price="1245000" data-area="oak ridge">
+            <div class="listing-media">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=84" alt="Modern single-family home exterior">
+              <span class="tag">New Listing</span>
+            </div>
+            <div class="listing-body">
+              <div class="price">$1,245,000</div>
+              <h3>Oak Ridge Modern Residence</h3>
+              <p>Tree-lined street, open kitchen, private garden, and a flexible studio over the garage.</p>
+              <div class="details"><span>4 beds</span><span>3 baths</span><span>3,120 sq ft</span></div>
+              <div class="button-row">
+                <a class="primary-button" href="#contact">Schedule Tour</a>
+                <a class="icon-button" href="#contact" aria-label="Ask about Oak Ridge Modern Residence">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="listing-card" data-type="condo" data-price="685000" data-area="harbor district">
+            <div class="listing-media">
+              <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=84" alt="Bright condo living room with city views">
+              <span class="tag">City View</span>
+            </div>
+            <div class="listing-body">
+              <div class="price">$685,000</div>
+              <h3>Harbor District Corner Condo</h3>
+              <p>Floor-to-ceiling light, concierge building, secure parking, and coffee downstairs.</p>
+              <div class="details"><span>2 beds</span><span>2 baths</span><span>1,340 sq ft</span></div>
+              <div class="button-row">
+                <a class="primary-button" href="#contact">Schedule Tour</a>
+                <a class="icon-button" href="#contact" aria-label="Ask about Harbor District Corner Condo">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="listing-card" data-type="townhome" data-price="935000" data-area="west garden">
+            <div class="listing-media">
+              <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=84" alt="Contemporary townhome kitchen and dining space">
+              <span class="tag">Open House</span>
+            </div>
+            <div class="listing-body">
+              <div class="price">$935,000</div>
+              <h3>West Garden Townhome</h3>
+              <p>Three levels, rooftop deck, upgraded finishes, and direct access to neighborhood parks.</p>
+              <div class="details"><span>3 beds</span><span>3.5 baths</span><span>2,060 sq ft</span></div>
+              <div class="button-row">
+                <a class="primary-button" href="#contact">Schedule Tour</a>
+                <a class="icon-button" href="#contact" aria-label="Ask about West Garden Townhome">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="neighborhoods" id="markets">
+      <div class="shell">
+        <div class="section-heading">
+          <h2>Local knowledge, block by block.</h2>
+          <p>Pricing, timing, and negotiation change from one pocket to the next. We help you read the market before you move.</p>
+        </div>
+
+        <div class="market-grid">
+          <article class="market-tile">
+            <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1100&q=82" alt="Downtown residential neighborhood">
+            <div class="market-copy"><strong>Harbor District</strong><span>Waterfront condos and weekday convenience</span></div>
+          </article>
+          <article class="market-tile">
+            <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1100&q=82" alt="Residential street with bright homes">
+            <div class="market-copy"><strong>Oak Ridge</strong><span>Classic homes, larger lots, quiet streets</span></div>
+          </article>
+          <article class="market-tile">
+            <img src="https://images.unsplash.com/photo-1592595896551-12b371d546d5?auto=format&fit=crop&w=1100&q=82" alt="Townhome row in a walkable neighborhood">
+            <div class="market-copy"><strong>West Garden</strong><span>Townhomes, parks, and a strong rental profile</span></div>
+          </article>
+          <article class="market-tile">
+            <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1100&q=82" alt="Leafy residential avenue">
+            <div class="market-copy"><strong>Maple Heights</strong><span>Family homes near schools and trails</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="shell">
+        <div class="section-heading">
+          <h2>A clear path from first conversation to closing.</h2>
+          <p>Every client gets a focused strategy, plain-language guidance, and steady communication through the entire move.</p>
+        </div>
+
+        <div class="process-grid">
+          <article class="process-step">
+            <strong>1</strong>
+            <h3>Define the move</h3>
+            <p>Goals, timing, financing, must-haves, deal breakers, and the market reality around each one.</p>
+          </article>
+          <article class="process-step">
+            <strong>2</strong>
+            <h3>Read the market</h3>
+            <p>Comparable sales, pricing pressure, offer strategy, and where leverage is likely to appear.</p>
+          </article>
+          <article class="process-step">
+            <strong>3</strong>
+            <h3>Move decisively</h3>
+            <p>Showings, negotiations, inspections, contingencies, timelines, and steady next steps.</p>
+          </article>
+          <article class="process-step">
+            <strong>4</strong>
+            <h3>Close cleanly</h3>
+            <p>Final details, trusted vendor coordination, and support after the keys change hands.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <div class="section-heading">
+          <h2>Clients come for the listings. They stay for the judgment.</h2>
+          <p>Measured advice, strong preparation, and a steady hand when the market starts moving quickly.</p>
+        </div>
+        <div class="testimonial-grid">
+          <article class="quote-card">
+            <p>"They helped us understand the numbers, avoid panic, and win the right house without overreaching."</p>
+            <strong>Maya R.</strong><span>Buyer, Oak Ridge</span>
+          </article>
+          <article class="quote-card">
+            <p>"The pricing strategy was clear from day one. We had multiple offers and closed above our target."</p>
+            <strong>Daniel K.</strong><span>Seller, West Garden</span>
+          </article>
+          <article class="quote-card">
+            <p>"Smart, responsive, and very honest about tradeoffs. That made the entire process easier to trust."</p>
+            <strong>Elena S.</strong><span>Investor, Harbor District</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="shell contact-layout">
+        <div>
+          <p class="eyebrow">Start with a quick consult</p>
+          <h2>Tell us where you want to go next.</h2>
+          <p>Whether you are buying, selling, relocating, or comparing investment options, we will help you understand the market and choose the next right move.</p>
+          <div class="contact-points">
+            <div class="contact-point">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="2"/></svg>
+              <div><strong>hello@harborhearth.example</strong><br><span>Replies within one business day</span></div>
+            </div>
+            <div class="contact-point">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.6 1.9Z" stroke="currentColor" stroke-width="2"/></svg>
+              <div><strong>(555) 018-4420</strong><br><span>Buyer and seller consultations</span></div>
+            </div>
+          </div>
+        </div>
+
+        <form class="lead-form" id="leadForm">
+          <label>First name<input type="text" name="firstName" autocomplete="given-name" required></label>
+          <label>Last name<input type="text" name="lastName" autocomplete="family-name" required></label>
+          <label>Email<input type="email" name="email" autocomplete="email" required></label>
+          <label>Phone<input type="tel" name="phone" autocomplete="tel"></label>
+          <label class="wide">I am interested in
+            <select name="interest">
+              <option>Buying a home</option>
+              <option>Selling a home</option>
+              <option>Home valuation</option>
+              <option>Investment property</option>
+            </select>
+          </label>
+          <label class="wide">Message<textarea name="message" placeholder="Neighborhoods, timeline, budget, or anything useful to know"></textarea></label>
+          <button class="secondary-button wide" type="submit">Request Consultation</button>
+          <p class="form-note wide" id="formNote">Demo form for the static preview. Connect this to a form service before launch.</p>
+        </form>
+      </div>
+
+      <footer class="footer">
+        <div class="shell">
+          <span>Harbor &amp; Hearth Realty</span>
+          <span>210 Market Street, Suite 400</span>
+          <span>Equal Housing Opportunity</span>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    const searchForm = document.querySelector("#propertySearch");
+    const listingCards = Array.from(document.querySelectorAll(".listing-card"));
+    const leadForm = document.querySelector("#leadForm");
+    const formNote = document.querySelector("#formNote");
+
+    searchForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const area = searchForm.area.value.trim().toLowerCase();
+      const type = searchForm.type.value;
+      const budget = searchForm.budget.value;
+
+      listingCards.forEach((card) => {
+        const matchesArea = !area || card.dataset.area.includes(area);
+        const matchesType = type === "all" || card.dataset.type === type;
+        const matchesBudget = budget === "all" || Number(card.dataset.price) <= Number(budget);
+        card.hidden = !(matchesArea && matchesType && matchesBudget);
+      });
+
+      document.querySelector("#listings").scrollIntoView({ behavior: "smooth" });
+    });
+
+    leadForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      formNote.textContent = "Thanks. This preview captured the action locally; connect a form service before launch.";
+    });
+  </script>
+</body>
+</html>
