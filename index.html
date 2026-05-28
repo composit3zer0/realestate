@@ -3,21 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Harbor & Hearth Realty</title>
-  <meta name="description" content="A refined real estate agency landing page for buyers, sellers, and local market guidance.">
+  <title>Isabel's Place Realty</title>
+  <meta name="description" content="Isabel's Place Realty connects buyers and sellers with homes, condos, and developer projects across the South Luzon corridor.">
   <style>
     :root {
-      --ink: #18201d;
-      --muted: #61706b;
-      --paper: #fbfaf7;
-      --line: #ded9cf;
-      --pine: #1f4d3a;
-      --pine-dark: #16382a;
-      --clay: #c8664b;
-      --gold: #c79a4b;
-      --mist: #eef2ef;
+      --ink: #17211d;
+      --muted: #5e6f69;
+      --paper: #fbfaf6;
+      --line: #ded8ce;
+      --forest: #1f4c39;
+      --forest-dark: #163629;
+      --bay: #246a73;
+      --clay: #c86d4a;
+      --sun: #f1c46c;
+      --mist: #edf3ef;
       --white: #ffffff;
-      --shadow: 0 18px 44px rgba(24, 32, 29, 0.14);
+      --shadow: 0 18px 44px rgba(23, 33, 29, 0.14);
     }
 
     * {
@@ -48,7 +49,8 @@
 
     button,
     input,
-    select {
+    select,
+    textarea {
       font: inherit;
     }
 
@@ -60,11 +62,9 @@
     .site-header {
       position: fixed;
       z-index: 20;
-      top: 0;
-      left: 0;
-      right: 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-      background: rgba(24, 32, 29, 0.76);
+      inset: 0 0 auto;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(22, 54, 41, 0.78);
       color: var(--white);
       backdrop-filter: blur(18px);
     }
@@ -74,15 +74,14 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 22px;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-weight: 800;
-      letter-spacing: 0;
+      font-weight: 850;
       white-space: nowrap;
     }
 
@@ -100,7 +99,7 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 26px;
+      gap: 24px;
       color: rgba(255, 255, 255, 0.86);
       font-size: 0.94rem;
     }
@@ -109,46 +108,78 @@
       color: var(--white);
     }
 
+    .nav-tools {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .currency-toggle {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      min-width: 122px;
+      min-height: 38px;
+      padding: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .currency-toggle button {
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.72);
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 850;
+    }
+
+    .currency-toggle button[aria-pressed="true"] {
+      background: var(--white);
+      color: var(--forest-dark);
+    }
+
     .nav-action,
     .primary-button,
     .secondary-button,
     .icon-button {
       border: 0;
-      cursor: pointer;
       border-radius: 8px;
       min-height: 44px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
+      cursor: pointer;
       transition: transform 180ms ease, background 180ms ease, color 180ms ease;
     }
 
     .nav-action {
       padding: 0 18px;
       background: var(--white);
-      color: var(--pine-dark);
-      font-weight: 750;
+      color: var(--forest-dark);
+      font-weight: 800;
     }
 
     .primary-button {
       padding: 0 20px;
-      background: var(--pine);
+      background: var(--forest);
       color: var(--white);
-      font-weight: 800;
+      font-weight: 850;
     }
 
     .secondary-button {
       padding: 0 18px;
-      background: rgba(255, 255, 255, 0.92);
-      color: var(--pine-dark);
-      font-weight: 800;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--forest-dark);
+      font-weight: 850;
     }
 
     .icon-button {
       width: 44px;
       background: var(--mist);
-      color: var(--pine-dark);
+      color: var(--forest-dark);
     }
 
     .nav-action:hover,
@@ -165,19 +196,19 @@
       padding: 132px 0 54px;
       color: var(--white);
       background:
-        linear-gradient(90deg, rgba(11, 20, 17, 0.82) 0%, rgba(11, 20, 17, 0.54) 43%, rgba(11, 20, 17, 0.18) 100%),
-        url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2200&q=86") center / cover;
+        linear-gradient(90deg, rgba(13, 29, 24, 0.84) 0%, rgba(13, 29, 24, 0.56) 46%, rgba(13, 29, 24, 0.16) 100%),
+        url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=86") center / cover;
     }
 
     .hero-layout {
       display: grid;
-      grid-template-columns: minmax(0, 720px);
+      grid-template-columns: minmax(0, 760px);
       gap: 30px;
     }
 
     .eyebrow {
       margin: 0 0 12px;
-      color: #f5c978;
+      color: var(--sun);
       font-size: 0.84rem;
       font-weight: 850;
       text-transform: uppercase;
@@ -193,16 +224,16 @@
 
     h1 {
       margin-bottom: 18px;
-      max-width: 760px;
-      font-size: clamp(3rem, 8vw, 6.7rem);
+      max-width: 820px;
+      font-size: clamp(3rem, 8vw, 6.6rem);
       line-height: 0.94;
       letter-spacing: 0;
     }
 
     .hero-copy {
-      max-width: 610px;
+      max-width: 650px;
       margin-bottom: 30px;
-      color: rgba(255, 255, 255, 0.88);
+      color: rgba(255, 255, 255, 0.9);
       font-size: clamp(1rem, 2.2vw, 1.22rem);
     }
 
@@ -214,14 +245,14 @@
     }
 
     .search-panel {
-      width: min(100%, 980px);
+      width: min(100%, 1020px);
       display: grid;
-      grid-template-columns: 1.35fr 1fr 1fr auto;
+      grid-template-columns: 1.25fr 1fr 1fr auto;
       gap: 12px;
       padding: 14px;
       border: 1px solid rgba(255, 255, 255, 0.24);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.95);
       box-shadow: var(--shadow);
     }
 
@@ -264,22 +295,22 @@
     }
 
     .section-heading h2 {
+      max-width: 680px;
       margin-bottom: 0;
-      max-width: 650px;
       font-size: clamp(2rem, 5vw, 3.7rem);
       line-height: 1;
       letter-spacing: 0;
     }
 
     .section-heading p {
-      max-width: 430px;
+      max-width: 445px;
       margin-bottom: 0;
       color: var(--muted);
     }
 
     .stats-band {
       padding: 30px 0;
-      background: var(--pine-dark);
+      background: var(--forest-dark);
       color: var(--white);
     }
 
@@ -295,7 +326,7 @@
       display: grid;
       align-content: center;
       padding: 22px;
-      background: var(--pine-dark);
+      background: var(--forest-dark);
     }
 
     .stat strong {
@@ -305,7 +336,7 @@
 
     .stat span {
       margin-top: 8px;
-      color: rgba(255, 255, 255, 0.72);
+      color: rgba(255, 255, 255, 0.74);
       font-size: 0.92rem;
     }
 
@@ -321,7 +352,7 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       background: var(--white);
-      box-shadow: 0 14px 34px rgba(24, 32, 29, 0.08);
+      box-shadow: 0 14px 34px rgba(23, 33, 29, 0.08);
     }
 
     .listing-card[hidden] {
@@ -351,8 +382,8 @@
       left: 14px;
       top: 14px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.92);
-      color: var(--pine-dark);
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--forest-dark);
       padding: 7px 11px;
       font-size: 0.76rem;
       font-weight: 850;
@@ -363,10 +394,17 @@
     }
 
     .price {
-      margin-bottom: 8px;
-      color: var(--pine);
-      font-size: 1.52rem;
+      margin-bottom: 4px;
+      color: var(--forest);
+      font-size: 1.45rem;
       font-weight: 900;
+    }
+
+    .rate-note {
+      min-height: 20px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 0.82rem;
     }
 
     .listing-body h3 {
@@ -375,8 +413,8 @@
     }
 
     .listing-body p {
-      color: var(--muted);
       margin-bottom: 15px;
+      color: var(--muted);
     }
 
     .details {
@@ -397,8 +435,8 @@
 
     .button-row {
       display: flex;
-      gap: 10px;
       align-items: center;
+      gap: 10px;
     }
 
     .neighborhoods {
@@ -417,7 +455,7 @@
       overflow: hidden;
       border-radius: 8px;
       color: var(--white);
-      background: var(--pine);
+      background: var(--forest);
     }
 
     .market-tile:nth-child(2) {
@@ -428,7 +466,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: saturate(0.92);
+      filter: saturate(0.95);
     }
 
     .market-tile::after {
@@ -452,7 +490,7 @@
     }
 
     .market-copy span {
-      color: rgba(255, 255, 255, 0.82);
+      color: rgba(255, 255, 255, 0.84);
     }
 
     .process-grid {
@@ -473,7 +511,7 @@
       height: 40px;
       margin-bottom: 20px;
       border-radius: 8px;
-      background: var(--pine-dark);
+      background: var(--forest-dark);
       color: var(--white);
     }
 
@@ -512,7 +550,7 @@
 
     .contact {
       padding-bottom: 0;
-      background: var(--pine-dark);
+      background: var(--forest-dark);
       color: var(--white);
     }
 
@@ -524,31 +562,13 @@
     }
 
     .contact h2 {
+      margin-bottom: 20px;
       font-size: clamp(2rem, 5vw, 4.2rem);
       line-height: 1;
-      margin-bottom: 20px;
     }
 
     .contact p {
-      color: rgba(255, 255, 255, 0.74);
-    }
-
-    .contact-points {
-      display: grid;
-      gap: 16px;
-      margin-top: 28px;
-    }
-
-    .contact-point {
-      display: flex;
-      gap: 14px;
-      align-items: start;
-    }
-
-    .contact-point svg {
-      flex: 0 0 auto;
-      margin-top: 2px;
-      color: #f5c978;
+      color: rgba(255, 255, 255, 0.76);
     }
 
     .lead-form {
@@ -568,7 +588,7 @@
     .lead-form label {
       display: grid;
       gap: 7px;
-      color: rgba(255, 255, 255, 0.74);
+      color: rgba(255, 255, 255, 0.76);
       font-size: 0.86rem;
       font-weight: 750;
     }
@@ -592,7 +612,7 @@
 
     .form-note {
       margin: 2px 0 0;
-      color: rgba(255, 255, 255, 0.62);
+      color: rgba(255, 255, 255, 0.66);
       font-size: 0.84rem;
     }
 
@@ -600,7 +620,7 @@
       margin-top: 74px;
       padding: 28px 0;
       border-top: 1px solid rgba(255, 255, 255, 0.14);
-      color: rgba(255, 255, 255, 0.66);
+      color: rgba(255, 255, 255, 0.68);
       font-size: 0.9rem;
     }
 
@@ -611,7 +631,7 @@
       flex-wrap: wrap;
     }
 
-    @media (max-width: 940px) {
+    @media (max-width: 980px) {
       .nav-links {
         display: none;
       }
@@ -637,7 +657,7 @@
       }
     }
 
-    @media (max-width: 680px) {
+    @media (max-width: 700px) {
       .shell {
         width: min(100% - 28px, 1160px);
       }
@@ -647,17 +667,25 @@
       }
 
       .brand span:last-child {
-        max-width: 168px;
+        max-width: 154px;
         white-space: normal;
         line-height: 1.1;
+      }
+
+      .nav-tools {
+        gap: 8px;
       }
 
       .nav-action {
         display: none;
       }
 
+      .currency-toggle {
+        min-width: 104px;
+      }
+
       .hero {
-        min-height: 860px;
+        min-height: 880px;
         padding-top: 112px;
       }
 
@@ -698,17 +726,23 @@
 <body>
   <header class="site-header">
     <div class="shell nav" aria-label="Primary navigation">
-      <a class="brand" href="#top" aria-label="Harbor and Hearth Realty home">
-        <span class="brand-mark">H</span>
-        <span>Harbor &amp; Hearth Realty</span>
+      <a class="brand" href="#top" aria-label="Isabel's Place Realty home">
+        <span class="brand-mark">I</span>
+        <span>Isabel's Place Realty</span>
       </a>
       <nav class="nav-links">
         <a href="#listings">Listings</a>
-        <a href="#markets">Markets</a>
+        <a href="#markets">Areas</a>
         <a href="#process">Process</a>
-        <a href="#contact">Contact</a>
+        <a href="#contact">Inquire</a>
       </nav>
-      <a class="nav-action" href="#contact">Book a Consult</a>
+      <div class="nav-tools">
+        <div class="currency-toggle" aria-label="Currency selector">
+          <button type="button" data-currency="PHP" aria-pressed="true">PHP</button>
+          <button type="button" data-currency="USD" aria-pressed="false">USD</button>
+        </div>
+        <a class="nav-action" href="#contact">Send Inquiry</a>
+      </div>
     </div>
   </header>
 
@@ -716,42 +750,52 @@
     <section class="hero">
       <div class="shell hero-layout">
         <div>
-          <p class="eyebrow">Residential real estate for decisive moves</p>
-          <h1>Harbor &amp; Hearth Realty</h1>
-          <p class="hero-copy">A calm, strategic agency for buyers, sellers, and investors who want local guidance, sharp pricing, and a smoother path from first showing to closing table.</p>
+          <p class="eyebrow">South Luzon homes, guided with care</p>
+          <h1>Isabel's Place Realty</h1>
+          <p class="hero-copy">A warm, practical real estate guide for families, investors, and overseas buyers comparing developer projects, house-and-lots, and condominiums from Parañaque to Calamba, Laguna.</p>
           <div class="hero-actions">
             <a class="primary-button" href="#listings">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 18a8 8 0 1 1 5.3-14 8 8 0 0 1-5.3 14Zm11 3-5.7-5.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-              Browse Homes
+              Browse Properties
             </a>
             <a class="secondary-button" href="#contact">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z" stroke="currentColor" stroke-width="2"/><path d="M14 3v6h6" stroke="currentColor" stroke-width="2"/></svg>
-              Get a Valuation
+              Ask for Matches
             </a>
           </div>
         </div>
 
         <form class="search-panel" id="propertySearch">
           <div class="field">
-            <label for="area">Location</label>
-            <input id="area" name="area" type="search" placeholder="Neighborhood, city, or ZIP">
+            <label for="area">Area</label>
+            <select id="area" name="area">
+              <option value="all">Any South Luzon area</option>
+              <option value="paranaque">Parañaque</option>
+              <option value="las-pinas">Las Piñas</option>
+              <option value="muntinlupa">Muntinlupa</option>
+              <option value="san-pedro">San Pedro</option>
+              <option value="santa-rosa">Santa Rosa</option>
+              <option value="cabuyao">Cabuyao</option>
+              <option value="calamba">Calamba</option>
+            </select>
           </div>
           <div class="field">
             <label for="type">Property Type</label>
             <select id="type" name="type">
               <option value="all">Any type</option>
-              <option value="single-family">Single-family</option>
-              <option value="condo">Condo</option>
-              <option value="townhome">Townhome</option>
+              <option value="developer-project">Developer project</option>
+              <option value="house-and-lot">House and lot</option>
+              <option value="condominium">Condominium</option>
+              <option value="lot">Lot only</option>
             </select>
           </div>
           <div class="field">
             <label for="budget">Budget</label>
             <select id="budget" name="budget">
               <option value="all">Any budget</option>
-              <option value="700000">Up to $700k</option>
-              <option value="1000000">Up to $1M</option>
-              <option value="1500000">Up to $1.5M</option>
+              <option value="5000000">Up to PHP 5M</option>
+              <option value="8500000">Up to PHP 8.5M</option>
+              <option value="13000000">Up to PHP 13M</option>
             </select>
           </div>
           <button class="primary-button" type="submit">Search</button>
@@ -761,72 +805,75 @@
 
     <div class="stats-band">
       <div class="shell stats" aria-label="Agency stats">
-        <div class="stat"><strong>$164M</strong><span>Closed volume</span></div>
-        <div class="stat"><strong>18</strong><span>Neighborhood markets</span></div>
-        <div class="stat"><strong>31</strong><span>Median days to close</span></div>
-        <div class="stat"><strong>4.9</strong><span>Client rating</span></div>
+        <div class="stat"><strong>7</strong><span>South Luzon areas</span></div>
+        <div class="stat"><strong>3</strong><span>Property paths</span></div>
+        <div class="stat"><strong>PHP</strong><span>Default pricing</span></div>
+        <div class="stat"><strong>USD</strong><span>Visitor toggle</span></div>
       </div>
     </div>
 
     <section id="listings">
       <div class="shell">
         <div class="section-heading">
-          <h2>Featured homes with room for the life you are building.</h2>
-          <p>Handpicked properties across established neighborhoods, walkable districts, and quiet residential streets.</p>
+          <h2>Featured opportunities across the southern corridor.</h2>
+          <p>Sample inventory for families and buyers comparing access, lifestyle, budget, and long-term value across Metro South and Laguna.</p>
         </div>
 
         <div class="listing-grid" id="listingGrid">
-          <article class="listing-card" data-type="single-family" data-price="1245000" data-area="oak ridge">
+          <article class="listing-card" data-type="developer-project" data-price-php="4200000" data-area="santa-rosa" data-category="developer-project">
             <div class="listing-media">
-              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=84" alt="Modern single-family home exterior">
-              <span class="tag">New Listing</span>
+              <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=84" alt="Bright suburban house in a planned residential community">
+              <span class="tag">Developer Project</span>
             </div>
             <div class="listing-body">
-              <div class="price">$1,245,000</div>
-              <h3>Oak Ridge Modern Residence</h3>
-              <p>Tree-lined street, open kitchen, private garden, and a flexible studio over the garage.</p>
-              <div class="details"><span>4 beds</span><span>3 baths</span><span>3,120 sq ft</span></div>
+              <div class="price" data-price-prefix="Starts at " data-price-php="4200000">Starts at PHP 4.2M</div>
+              <div class="rate-note" data-rate-note></div>
+              <h3>Santa Rosa Garden Community</h3>
+              <p>Pre-selling homes near schools, retail, and expressway access for buyers planning a move south.</p>
+              <div class="details"><span>2-3 beds</span><span>Townhouse options</span><span>Developer terms</span></div>
               <div class="button-row">
-                <a class="primary-button" href="#contact">Schedule Tour</a>
-                <a class="icon-button" href="#contact" aria-label="Ask about Oak Ridge Modern Residence">
+                <a class="primary-button" href="#contact">Request Details</a>
+                <a class="icon-button" href="#contact" aria-label="Ask about Santa Rosa Garden Community">
                   <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
                 </a>
               </div>
             </div>
           </article>
 
-          <article class="listing-card" data-type="condo" data-price="685000" data-area="harbor district">
+          <article class="listing-card" data-type="house-and-lot" data-price-php="8500000" data-area="muntinlupa" data-category="house-and-lot">
             <div class="listing-media">
-              <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=84" alt="Bright condo living room with city views">
-              <span class="tag">City View</span>
+              <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=84" alt="Sunny home interior with dining area and kitchen">
+              <span class="tag">House &amp; Lot</span>
             </div>
             <div class="listing-body">
-              <div class="price">$685,000</div>
-              <h3>Harbor District Corner Condo</h3>
-              <p>Floor-to-ceiling light, concierge building, secure parking, and coffee downstairs.</p>
-              <div class="details"><span>2 beds</span><span>2 baths</span><span>1,340 sq ft</span></div>
+              <div class="price" data-price-prefix="" data-price-php="8500000">PHP 8.5M</div>
+              <div class="rate-note" data-rate-note></div>
+              <h3>Muntinlupa Family Home</h3>
+              <p>A ready-for-viewing family home with practical storage, flexible living spaces, and quick access to Alabang routes.</p>
+              <div class="details"><span>4 beds</span><span>3 baths</span><span>2-car parking</span></div>
               <div class="button-row">
-                <a class="primary-button" href="#contact">Schedule Tour</a>
-                <a class="icon-button" href="#contact" aria-label="Ask about Harbor District Corner Condo">
+                <a class="primary-button" href="#contact">Schedule Viewing</a>
+                <a class="icon-button" href="#contact" aria-label="Ask about Muntinlupa Family Home">
                   <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
                 </a>
               </div>
             </div>
           </article>
 
-          <article class="listing-card" data-type="townhome" data-price="935000" data-area="west garden">
+          <article class="listing-card" data-type="condominium" data-price-php="6200000" data-area="paranaque" data-category="condominium">
             <div class="listing-media">
-              <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=84" alt="Contemporary townhome kitchen and dining space">
-              <span class="tag">Open House</span>
+              <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=84" alt="Bright condominium living room with large windows">
+              <span class="tag">Condominium</span>
             </div>
             <div class="listing-body">
-              <div class="price">$935,000</div>
-              <h3>West Garden Townhome</h3>
-              <p>Three levels, rooftop deck, upgraded finishes, and direct access to neighborhood parks.</p>
-              <div class="details"><span>3 beds</span><span>3.5 baths</span><span>2,060 sq ft</span></div>
+              <div class="price" data-price-prefix="" data-price-php="6200000">PHP 6.2M</div>
+              <div class="rate-note" data-rate-note></div>
+              <h3>Parañaque City Condo</h3>
+              <p>Low-maintenance living for frequent travelers, young families, or buyers who want airport and city access.</p>
+              <div class="details"><span>2 beds</span><span>2 baths</span><span>Amenities</span></div>
               <div class="button-row">
-                <a class="primary-button" href="#contact">Schedule Tour</a>
-                <a class="icon-button" href="#contact" aria-label="Ask about West Garden Townhome">
+                <a class="primary-button" href="#contact">Ask Availability</a>
+                <a class="icon-button" href="#contact" aria-label="Ask about Parañaque City Condo">
                   <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
                 </a>
               </div>
@@ -839,26 +886,26 @@
     <section class="neighborhoods" id="markets">
       <div class="shell">
         <div class="section-heading">
-          <h2>Local knowledge, block by block.</h2>
-          <p>Pricing, timing, and negotiation change from one pocket to the next. We help you read the market before you move.</p>
+          <h2>From Metro South convenience to Laguna growth areas.</h2>
+          <p>Compare commute routes, community feel, developer inventory, and long-term fit across the corridor before choosing where to focus.</p>
         </div>
 
         <div class="market-grid">
           <article class="market-tile">
-            <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1100&q=82" alt="Downtown residential neighborhood">
-            <div class="market-copy"><strong>Harbor District</strong><span>Waterfront condos and weekday convenience</span></div>
+            <img src="https://images.unsplash.com/photo-1592595896551-12b371d546d5?auto=format&fit=crop&w=1100&q=82" alt="Bright residential row homes">
+            <div class="market-copy"><strong>Parañaque &amp; Las Piñas</strong><span>Condos, townhomes, and city access</span></div>
           </article>
           <article class="market-tile">
-            <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1100&q=82" alt="Residential street with bright homes">
-            <div class="market-copy"><strong>Oak Ridge</strong><span>Classic homes, larger lots, quiet streets</span></div>
+            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1100&q=82" alt="Suburban home with landscaped garden">
+            <div class="market-copy"><strong>Muntinlupa &amp; San Pedro</strong><span>Family homes near southern routes</span></div>
           </article>
           <article class="market-tile">
-            <img src="https://images.unsplash.com/photo-1592595896551-12b371d546d5?auto=format&fit=crop&w=1100&q=82" alt="Townhome row in a walkable neighborhood">
-            <div class="market-copy"><strong>West Garden</strong><span>Townhomes, parks, and a strong rental profile</span></div>
+            <img src="https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=1100&q=82" alt="Modern residential home with greenery">
+            <div class="market-copy"><strong>Santa Rosa &amp; Cabuyao</strong><span>Developer projects and new communities</span></div>
           </article>
           <article class="market-tile">
             <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1100&q=82" alt="Leafy residential avenue">
-            <div class="market-copy"><strong>Maple Heights</strong><span>Family homes near schools and trails</span></div>
+            <div class="market-copy"><strong>Calamba, Laguna</strong><span>More space, growing access, and value options</span></div>
           </article>
         </div>
       </div>
@@ -867,30 +914,30 @@
     <section id="process">
       <div class="shell">
         <div class="section-heading">
-          <h2>A clear path from first conversation to closing.</h2>
-          <p>Every client gets a focused strategy, plain-language guidance, and steady communication through the entire move.</p>
+          <h2>A calmer way to compare homes, projects, and timing.</h2>
+          <p>Isabel's Place Realty keeps the process practical: narrow the options, understand the costs, and move only when the fit is right.</p>
         </div>
 
         <div class="process-grid">
           <article class="process-step">
             <strong>1</strong>
-            <h3>Define the move</h3>
-            <p>Goals, timing, financing, must-haves, deal breakers, and the market reality around each one.</p>
+            <h3>Clarify the move</h3>
+            <p>Budget, preferred areas, financing route, family needs, and whether a ready home or developer project fits best.</p>
           </article>
           <article class="process-step">
             <strong>2</strong>
-            <h3>Read the market</h3>
-            <p>Comparable sales, pricing pressure, offer strategy, and where leverage is likely to appear.</p>
+            <h3>Compare real options</h3>
+            <p>Shortlist properties across Parañaque, Muntinlupa, Laguna, and nearby cities with clear tradeoffs.</p>
           </article>
           <article class="process-step">
             <strong>3</strong>
-            <h3>Move decisively</h3>
-            <p>Showings, negotiations, inspections, contingencies, timelines, and steady next steps.</p>
+            <h3>Check the details</h3>
+            <p>Availability, payment terms, turnover timing, association dues, access, and documents before committing.</p>
           </article>
           <article class="process-step">
             <strong>4</strong>
-            <h3>Close cleanly</h3>
-            <p>Final details, trusted vendor coordination, and support after the keys change hands.</p>
+            <h3>Move with support</h3>
+            <p>Coordinate viewing, reservation, negotiation, and next steps with steady guidance from inquiry to handover.</p>
           </article>
         </div>
       </div>
@@ -899,21 +946,21 @@
     <section>
       <div class="shell">
         <div class="section-heading">
-          <h2>Clients come for the listings. They stay for the judgment.</h2>
-          <p>Measured advice, strong preparation, and a steady hand when the market starts moving quickly.</p>
+          <h2>Friendly guidance for a very practical decision.</h2>
+          <p>The goal is simple: help buyers feel clear about what they can afford, where they should look, and what comes next.</p>
         </div>
         <div class="testimonial-grid">
           <article class="quote-card">
-            <p>"They helped us understand the numbers, avoid panic, and win the right house without overreaching."</p>
-            <strong>Maya R.</strong><span>Buyer, Oak Ridge</span>
+            <p>"We were comparing too many areas at once. Isabel's Place helped us focus on the homes that actually fit our route and budget."</p>
+            <strong>Mariel R.</strong><span>Buyer, Muntinlupa</span>
           </article>
           <article class="quote-card">
-            <p>"The pricing strategy was clear from day one. We had multiple offers and closed above our target."</p>
-            <strong>Daniel K.</strong><span>Seller, West Garden</span>
+            <p>"The explanation of developer terms made the biggest difference. We understood the reservation, turnover, and monthly payments clearly."</p>
+            <strong>Jon C.</strong><span>Project buyer, Santa Rosa</span>
           </article>
           <article class="quote-card">
-            <p>"Smart, responsive, and very honest about tradeoffs. That made the entire process easier to trust."</p>
-            <strong>Elena S.</strong><span>Investor, Harbor District</span>
+            <p>"It felt personal without pressure. We saw condo and house options side by side before deciding what made sense."</p>
+            <strong>Anna S.</strong><span>Buyer, Parañaque</span>
           </article>
         </div>
       </div>
@@ -922,19 +969,9 @@
     <section class="contact" id="contact">
       <div class="shell contact-layout">
         <div>
-          <p class="eyebrow">Start with a quick consult</p>
-          <h2>Tell us where you want to go next.</h2>
-          <p>Whether you are buying, selling, relocating, or comparing investment options, we will help you understand the market and choose the next right move.</p>
-          <div class="contact-points">
-            <div class="contact-point">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="2"/></svg>
-              <div><strong>hello@harborhearth.example</strong><br><span>Replies within one business day</span></div>
-            </div>
-            <div class="contact-point">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.6 1.9Z" stroke="currentColor" stroke-width="2"/></svg>
-              <div><strong>(555) 018-4420</strong><br><span>Buyer and seller consultations</span></div>
-            </div>
-          </div>
+          <p class="eyebrow">Frontend preview form</p>
+          <h2>Tell us what kind of place you are looking for.</h2>
+          <p>This preview keeps the form local for now. When the frontend direction is approved, it can be connected to email, SMS, or a proper lead system.</p>
         </div>
 
         <form class="lead-form" id="leadForm">
@@ -942,46 +979,141 @@
           <label>Last name<input type="text" name="lastName" autocomplete="family-name" required></label>
           <label>Email<input type="email" name="email" autocomplete="email" required></label>
           <label>Phone<input type="tel" name="phone" autocomplete="tel"></label>
-          <label class="wide">I am interested in
-            <select name="interest">
-              <option>Buying a home</option>
-              <option>Selling a home</option>
-              <option>Home valuation</option>
-              <option>Investment property</option>
+          <label>Preferred area
+            <select name="preferredArea">
+              <option>Any South Luzon area</option>
+              <option>Parañaque</option>
+              <option>Las Piñas</option>
+              <option>Muntinlupa</option>
+              <option>San Pedro</option>
+              <option>Santa Rosa</option>
+              <option>Cabuyao</option>
+              <option>Calamba</option>
             </select>
           </label>
-          <label class="wide">Message<textarea name="message" placeholder="Neighborhoods, timeline, budget, or anything useful to know"></textarea></label>
-          <button class="secondary-button wide" type="submit">Request Consultation</button>
-          <p class="form-note wide" id="formNote">Demo form for the static preview. Connect this to a form service before launch.</p>
+          <label>I am interested in
+            <select name="interest">
+              <option>Developer project</option>
+              <option>House and lot</option>
+              <option>Condominium</option>
+              <option>Lot only</option>
+              <option>Selling a property</option>
+            </select>
+          </label>
+          <label class="wide">Message<textarea name="message" placeholder="Budget, timeline, preferred cities, or questions about payment terms"></textarea></label>
+          <button class="secondary-button wide" type="submit">Preview Inquiry</button>
+          <p class="form-note wide" id="formNote">This static preview does not send messages yet.</p>
         </form>
       </div>
 
       <footer class="footer">
         <div class="shell">
-          <span>Harbor &amp; Hearth Realty</span>
-          <span>210 Market Street, Suite 400</span>
-          <span>Equal Housing Opportunity</span>
+          <span>Isabel's Place Realty</span>
+          <span>South Luzon corridor</span>
+          <span>Frontend preview only</span>
         </div>
       </footer>
     </section>
   </main>
 
   <script>
+    const FALLBACK_PHP_TO_USD = 0.01625;
+    const STORAGE_KEY = "isabelsPlaceCurrency";
+
     const searchForm = document.querySelector("#propertySearch");
     const listingCards = Array.from(document.querySelectorAll(".listing-card"));
     const leadForm = document.querySelector("#leadForm");
     const formNote = document.querySelector("#formNote");
+    const currencyButtons = Array.from(document.querySelectorAll("[data-currency]"));
+    const priceNodes = Array.from(document.querySelectorAll(".price[data-price-php]"));
+    const rateNotes = Array.from(document.querySelectorAll("[data-rate-note]"));
+
+    let phpToUsdRate = FALLBACK_PHP_TO_USD;
+    let currentCurrency = getInitialCurrency();
+
+    function getInitialCurrency() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored === "PHP" || stored === "USD") {
+        return stored;
+      }
+
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      return timezone === "Asia/Manila" ? "PHP" : "USD";
+    }
+
+    function formatPhp(value) {
+      if (value >= 1000000) {
+        return `PHP ${(value / 1000000).toFixed(value % 1000000 === 0 ? 0 : 1)}M`;
+      }
+
+      return `PHP ${Math.round(value).toLocaleString("en-PH")}`;
+    }
+
+    function formatUsd(value) {
+      const converted = value * phpToUsdRate;
+      if (converted >= 1000000) {
+        return `~$${(converted / 1000000).toFixed(1)}M`;
+      }
+
+      if (converted >= 1000) {
+        return `~$${Math.round(converted / 1000)}K`;
+      }
+
+      return `~$${Math.round(converted).toLocaleString("en-US")}`;
+    }
+
+    function renderPrices() {
+      priceNodes.forEach((node) => {
+        const phpValue = Number(node.dataset.pricePhp);
+        const prefix = node.dataset.pricePrefix || "";
+        node.textContent = `${prefix}${currentCurrency === "PHP" ? formatPhp(phpValue) : formatUsd(phpValue)}`;
+      });
+
+      currencyButtons.forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.currency === currentCurrency));
+      });
+
+      rateNotes.forEach((node) => {
+        node.textContent = currentCurrency === "USD" ? `Converted from PHP at approx. ${phpToUsdRate.toFixed(5)} USD per PHP.` : "";
+      });
+    }
+
+    async function loadExchangeRate() {
+      try {
+        const response = await fetch("https://api.frankfurter.dev/v2/rate/PHP/USD");
+        if (!response.ok) {
+          throw new Error("Exchange-rate request failed");
+        }
+
+        const data = await response.json();
+        if (typeof data.rate === "number") {
+          phpToUsdRate = data.rate;
+          renderPrices();
+        }
+      } catch (error) {
+        phpToUsdRate = FALLBACK_PHP_TO_USD;
+        renderPrices();
+      }
+    }
+
+    currencyButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        currentCurrency = button.dataset.currency;
+        localStorage.setItem(STORAGE_KEY, currentCurrency);
+        renderPrices();
+      });
+    });
 
     searchForm.addEventListener("submit", (event) => {
       event.preventDefault();
-      const area = searchForm.area.value.trim().toLowerCase();
+      const area = searchForm.area.value;
       const type = searchForm.type.value;
       const budget = searchForm.budget.value;
 
       listingCards.forEach((card) => {
-        const matchesArea = !area || card.dataset.area.includes(area);
+        const matchesArea = area === "all" || card.dataset.area === area;
         const matchesType = type === "all" || card.dataset.type === type;
-        const matchesBudget = budget === "all" || Number(card.dataset.price) <= Number(budget);
+        const matchesBudget = budget === "all" || Number(card.dataset.pricePhp) <= Number(budget);
         card.hidden = !(matchesArea && matchesType && matchesBudget);
       });
 
@@ -990,8 +1122,11 @@
 
     leadForm.addEventListener("submit", (event) => {
       event.preventDefault();
-      formNote.textContent = "Thanks. This preview captured the action locally; connect a form service before launch.";
+      formNote.textContent = "Thanks. This is a frontend preview, so the inquiry was not sent yet.";
     });
+
+    renderPrices();
+    loadExchangeRate();
   </script>
 </body>
 </html>

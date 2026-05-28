@@ -1,6 +1,6 @@
-# Real Estate Landing Page
+# Isabel's Place Realty Landing Page
 
-Static landing page for a real estate agency preview.
+Static landing page for Isabel's Place Realty, focused on South Luzon residential opportunities from Parañaque to Calamba, Laguna.
 
 ## Files
 
@@ -17,4 +17,4 @@ The public URL will look like:
 
 ## Notes
 
-The contact form is a static demo. Before using the page for real leads, connect it to a form service or backend.
+The contact form is a static frontend preview. Before using the page for real leads, connect it to a form service or backend.
