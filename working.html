@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Isabel's Place Realty</title>
   <meta name="description" content="Isabel's Place Realty connects buyers and sellers with homes, condos, and developer projects across the South Luzon corridor.">
   <style>
@@ -35,6 +35,7 @@
       color: var(--ink);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.5;
+      overflow-x: hidden;
     }
 
     a {
@@ -45,6 +46,7 @@
     img {
       display: block;
       max-width: 100%;
+      height: auto;
     }
 
     button,
@@ -106,6 +108,49 @@
 
     .nav-links a:hover {
       color: var(--white);
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--white);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+    }
+
+    .nav-toggle span,
+    .nav-toggle::before,
+    .nav-toggle::after {
+      content: "";
+      display: block;
+      width: 20px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    .nav-toggle {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .nav-toggle[aria-expanded="true"] span {
+      opacity: 0;
+    }
+
+    .nav-toggle[aria-expanded="true"]::before {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle[aria-expanded="true"]::after {
+      transform: translateY(-7px) rotate(-45deg);
     }
 
     .nav-tools {
@@ -646,6 +691,7 @@
     .lead-form select,
     .lead-form textarea {
       width: 100%;
+      min-height: 44px;
       border: 1px solid rgba(255, 255, 255, 0.24);
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.94);
@@ -681,8 +727,55 @@
     }
 
     @media (max-width: 980px) {
+      .nav {
+        position: relative;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+      }
+
       .nav-links {
-        display: none;
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        display: grid;
+        gap: 2px;
+        padding: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 8px;
+        background: rgba(22, 54, 41, 0.96);
+        box-shadow: var(--shadow);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-8px);
+        visibility: hidden;
+        transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+      }
+
+      .nav-links.is-open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+        visibility: visible;
+      }
+
+      .nav-links a {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        border-radius: 8px;
+        padding: 0 14px;
+      }
+
+      .nav-links a:hover,
+      .nav-links a:focus {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .currency-toggle {
+        min-height: 44px;
       }
 
       .search-panel,
@@ -703,6 +796,29 @@
 
       .market-tile:nth-child(2) {
         grid-row: span 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 64px 0;
+      }
+
+      .stats,
+      .listing-grid,
+      .process-grid,
+      .testimonial-grid,
+      .market-grid,
+      .lead-form {
+        grid-template-columns: 1fr;
+      }
+
+      .market-grid {
+        grid-auto-rows: 240px;
+      }
+
+      .contact-layout {
+        gap: 28px;
       }
     }
 
@@ -760,17 +876,64 @@
         margin-top: 14px;
       }
 
-      .stats,
-      .listing-grid,
-      .process-grid,
-      .testimonial-grid,
-      .market-grid,
-      .lead-form {
-        grid-template-columns: 1fr;
-      }
-
       .market-grid {
         grid-auto-rows: 230px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .shell {
+        width: min(100% - 24px, 1160px);
+      }
+
+      .nav {
+        min-height: 66px;
+        gap: 10px;
+      }
+
+      .brand {
+        gap: 9px;
+        font-size: 0.92rem;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+      }
+
+      .currency-toggle {
+        min-width: 96px;
+        min-height: 44px;
+      }
+
+      .hero {
+        min-height: 760px;
+        padding: 100px 0 34px;
+      }
+
+      .hero::after {
+        background: linear-gradient(180deg, rgba(13, 29, 24, 0.82) 0%, rgba(13, 29, 24, 0.62) 45%, rgba(13, 29, 24, 0.86) 100%);
+      }
+
+      h1 {
+        font-size: clamp(2.55rem, 16vw, 4.2rem);
+      }
+
+      .hero-message {
+        font-size: clamp(1.55rem, 10vw, 3rem);
+      }
+
+      .search-panel {
+        padding: 12px;
+      }
+
+      .lead-form {
+        padding: 16px;
+      }
+
+      .footer .shell {
+        display: grid;
+        gap: 10px;
       }
     }
   </style>
@@ -782,13 +945,16 @@
         <span class="brand-mark">I</span>
         <span>Isabel's Place Realty</span>
       </a>
-      <nav class="nav-links">
+      <nav class="nav-links" id="mobileMenu">
         <a href="#listings">Listings</a>
         <a href="#markets">Areas</a>
         <a href="#process">Process</a>
         <a href="#contact">Inquire</a>
       </nav>
       <div class="nav-tools">
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+          <span></span>
+        </button>
         <div class="currency-toggle" aria-label="Currency selector">
           <button type="button" data-currency="PHP" aria-pressed="true">PHP</button>
           <button type="button" data-currency="USD" aria-pressed="false">USD</button>
@@ -1081,6 +1247,8 @@
     const formNote = document.querySelector("#formNote");
     const heroSlides = Array.from(document.querySelectorAll(".hero-slide"));
     const heroMessages = Array.from(document.querySelectorAll(".hero-message"));
+    const navToggle = document.querySelector(".nav-toggle");
+    const navLinks = document.querySelector(".nav-links");
     const currencyButtons = Array.from(document.querySelectorAll("[data-currency]"));
     const priceNodes = Array.from(document.querySelectorAll(".price[data-price-php]"));
     const rateNotes = Array.from(document.querySelectorAll("[data-rate-note]"));
@@ -1177,6 +1345,20 @@
         currentCurrency = button.dataset.currency;
         localStorage.setItem(STORAGE_KEY, currentCurrency);
         renderPrices();
+      });
+    });
+
+    navToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("is-open");
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+      navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("is-open");
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.setAttribute("aria-label", "Open menu");
       });
     });
 
